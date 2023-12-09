@@ -10,11 +10,6 @@ COPY . .
 
 EXPOSE 8080
 
-RUN python manage.py makemigrations
-RUN python manage.py migrate
-RUN python manage.py collectstatic
-
-RUN export DJANGO_SUPERUSER_PASSWORD=admin
-RUN python manage.py createsuperuser --no-input --username=admin  --email=admin@mail.com
+ENTRYPOINT ["bash", "entrypoint.sh"]
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8080"]
